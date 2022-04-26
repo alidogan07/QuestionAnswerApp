@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBQAPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBQAPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="DBQAPModel.Comments" />
+    <EntitySet Name="Questions" EntityType="DBQAPModel.Questions" />
+    <EntitySet Name="Writers" EntityType="DBQAPModel.Writers" />
+    <AssociationSet Name="FK_Comments_ToQuestions" Association="DBQAPModel.FK_Comments_ToQuestions">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_ToWriters" Association="DBQAPModel.FK_Comments_ToWriters">
+      <End Role="Writers" EntitySet="Writers" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_ToWriters" Association="DBQAPModel.FK_Questions_ToWriters">
+      <End Role="Writers" EntitySet="Writers" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="cId" />
+    </Key>
+    <Property Name="cId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="comment" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="qid" Type="Int32" Nullable="false" />
+    <Property Name="uid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Questions" Relationship="DBQAPModel.FK_Comments_ToQuestions" FromRole="Comments" ToRole="Questions" />
+    <NavigationProperty Name="Writers" Relationship="DBQAPModel.FK_Comments_ToWriters" FromRole="Comments" ToRole="Writers" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="qId" />
+    </Key>
+    <Property Name="qId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="qDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="qTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="uid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Comments" Relationship="DBQAPModel.FK_Comments_ToQuestions" FromRole="Questions" ToRole="Comments" />
+    <NavigationProperty Name="Writers" Relationship="DBQAPModel.FK_Questions_ToWriters" FromRole="Questions" ToRole="Writers" />
+  </EntityType>
+  <EntityType Name="Writers">
+    <Key>
+      <PropertyRef Name="uId" />
+    </Key>
+    <Property Name="uId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Comments" Relationship="DBQAPModel.FK_Comments_ToWriters" FromRole="Writers" ToRole="Comments" />
+    <NavigationProperty Name="Questions" Relationship="DBQAPModel.FK_Questions_ToWriters" FromRole="Writers" ToRole="Questions" />
+    <Property Name="role" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Comments_ToQuestions">
+    <End Type="DBQAPModel.Questions" Role="Questions" Multiplicity="1" />
+    <End Type="DBQAPModel.Comments" Role="Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="qId" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="qid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_ToWriters">
+    <End Type="DBQAPModel.Writers" Role="Writers" Multiplicity="1" />
+    <End Type="DBQAPModel.Comments" Role="Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writers">
+        <PropertyRef Name="uId" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_ToWriters">
+    <End Type="DBQAPModel.Writers" Role="Writers" Multiplicity="1" />
+    <End Type="DBQAPModel.Questions" Role="Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writers">
+        <PropertyRef Name="uId" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

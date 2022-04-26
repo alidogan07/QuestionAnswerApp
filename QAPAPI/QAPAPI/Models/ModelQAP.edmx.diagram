@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d368c19c42b548e7ba4b60f30079bdd4" Name="Diagram1">
+        <EntityTypeShape EntityType="DBQAPModel.Comments" Width="1.5" PointX="3.125" PointY="0.5" />
+        <EntityTypeShape EntityType="DBQAPModel.Questions" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="DBQAPModel.Writers" Width="1.5" PointX="0.5" PointY="2.125" />
+        <AssociationConnector Association="DBQAPModel.FK_Comments_ToQuestions" />
+        <AssociationConnector Association="DBQAPModel.FK_Comments_ToWriters" />
+        <AssociationConnector Association="DBQAPModel.FK_Questions_ToWriters" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

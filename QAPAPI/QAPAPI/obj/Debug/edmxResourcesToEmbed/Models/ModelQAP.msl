@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBQAPModelStoreContainer" CdmEntityContainer="DBQAPEntities">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="DBQAPModel.Comments">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="qid" ColumnName="qid" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="cId" ColumnName="cId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="DBQAPModel.Questions">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="qTitle" ColumnName="qTitle" />
+          <ScalarProperty Name="qDesc" ColumnName="qDesc" />
+          <ScalarProperty Name="qId" ColumnName="qId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Writers">
+      <EntityTypeMapping TypeName="DBQAPModel.Writers">
+        <MappingFragment StoreEntitySet="Writers">
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="uId" ColumnName="uId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
