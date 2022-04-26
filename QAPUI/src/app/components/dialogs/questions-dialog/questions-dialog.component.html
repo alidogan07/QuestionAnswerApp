@@ -1,0 +1,41 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{dialogTitle}}</span>
+</mat-toolbar>
+<div class="container" *ngIf="job!='detail'">
+  <form [formGroup]="frm">
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <mat-label>Soru Başlığı</mat-label>
+      <input matInput placeholder="Soru Başlığı" formControlName="qTitle" required>
+    </mat-form-field>
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <mat-label>Soru İçeriği</mat-label>
+      <textarea style="height: 200px;" matInput placeholder="Soru İçeriği" formControlName="qDesc" required></textarea>
+    </mat-form-field>
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <mat-label>Kategori Adı</mat-label>
+      <mat-select placeholder="Kategori Adı" formControlName="category" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category.name">
+          {{category.name}}
+        </mat-option>
+      </mat-select>     
+    </mat-form-field>
+  </form>
+  <p>&nbsp;</p>
+  <button mat-raised-button color="primary" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+  <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>&nbsp;
+</div>
+
+<div class="container" *ngIf="job=='detail'">
+  <h2>{{newQuestion.qTitle}}</h2>
+  <div>{{newQuestion.qDesc}}</div>
+  <br>
+  <span ><b>Kategori : {{newQuestion.category}}</b></span>
+  <br>
+  <span ><b>Tarih : {{newQuestion.date | date:'dd.MM.YYYY HH:mm:ss'}}</b></span>
+  <br>
+  <span ><b>Yazar : {{newQuestion.username}}</b></span>
+  <br><br>
+  <button mat-raised-button color="warn" (click)="dialogRef.close()">Kapat</button>
+</div>
+

@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Tüm Soruları Listele</h2>
+  <hr>
+  <button mat-fab matTooltip="Soru Ekle" color="primary" (click)="addQuestion()">
+    <mat-icon aria-label="label" >add</mat-icon>
+  </button>
+  <p>&nbsp;</p>
+
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="qTitle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Soru Başlığı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question.qTitle}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kategori Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question.category}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Soru Yazarı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question.username}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Soru Tarihi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let question"> {{question.date | date:'dd.MM.yyyy HH:mm:ss'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="detail">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let question"> 
+
+        <button mat-icon-button color="primary" matTooltip="Soru Önizle" (click)="detailQuestion(question)">
+          <mat-icon aria-label="label">search</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" matTooltip="Soru Düzenle" (click)="editQuestion(question)">
+          <mat-icon aria-label="label">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" matTooltip="Soru Sil" (click)="deleteQuestion(question)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>

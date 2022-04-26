@@ -1,0 +1,31 @@
+<div class="container" *ngIf="question">
+  <h1>{{question?.qTitle}}</h1>
+  <p>
+    <b>Kategori : </b> {{question.category}}&nbsp;&nbsp;
+    <b>Tarih : </b> {{question.date | date:'dd.MM.yyyy HH:mm:ss'}}&nbsp;&nbsp;
+    <b>Yazan : </b>{{question.username}}&nbsp;&nbsp;
+  </p>
+  <hr>
+  <div>
+    {{question.qDesc}}
+  </div>
+  <br><br>
+  <h1>Yorumlar</h1>
+  <div *ngFor="let comment of comments">
+    <b>Tarih : </b> {{comment.date | date:'dd.MM.yyyy HH:mm:ss'}}&nbsp;&nbsp;
+    <b>Yazan : </b>{{comment.username}}&nbsp;&nbsp;
+    <p>{{comment.comment}}</p>
+    <button mat-raised-button color="primary" *ngIf="comment.uid == uId || apiService.checkRoles(['admin'])" (click)="editComment(comment)">Yorum Düzenle</button>&nbsp;&nbsp;
+    <button mat-raised-button color="warn" *ngIf="comment.uid == uId || apiService.checkRoles(['admin'])" (click)="deleteComment(comment)">Yorum Sil</button>
+    <hr>
+  </div>
+  <h3 *ngIf="!apiService.checkLogin()" style="color : red;">Yorum Yazabilmek İçin <a href="#" [routerLink]="['/login']">Oturum Açınız</a></h3>
+  <div *ngIf="apiService.checkLogin()">
+    <mat-form-field appearance="outline">
+      <mat-label>Yorumunuz</mat-label>
+      <textarea matInput placeholder="Yorumunuz" #commentText></textarea>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="addComment(commentText.value)">Yorum Ekle</button>
+  </div>    
+</div>

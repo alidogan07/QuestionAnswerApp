@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{dialogTitle}}</span>
+</mat-toolbar>
+<div class="container">
+  <form [formGroup]="frm">
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <mat-label>Kullanıcı Adı</mat-label>
+      <input matInput placeholder="Kullanıcı Adı" formControlName="username" required>
+    </mat-form-field>
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <mat-label>Parola</mat-label>
+      <input matInput placeholder="Parola" formControlName="password" required>
+    </mat-form-field>
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input matInput placeholder="E-mail" formControlName="mail" required>
+    </mat-form-field>
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <mat-label>Roller</mat-label>
+      <mat-select placeholder="Roller" formControlName="role" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let role of roles" [value]="role.id">
+          {{role.name}}
+        </mat-option>
+      </mat-select>     
+    </mat-form-field>
+  </form>
+
+</div>
+<p>&nbsp;</p>
+<button mat-raised-button color="primary" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+<button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>&nbsp;

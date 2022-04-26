@@ -1,0 +1,29 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar style="background-color: #3F51B5;color:white" class="mat-elevation-z6">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/questions']">Sorular</a>
+      <a mat-list-item [routerLink]="['/admin/writers']" *ngIf="apiService.checkRoles(['admin'])">Üyeleri Listele</a>
+      <a mat-list-item [routerLink]="['/admin/questions']" *ngIf="apiService.checkRoles(['admin'])">Tüm Soruları Listele</a>
+      <a mat-list-item *ngIf="this.apiService.checkLogin()" [routerLink]="['/myquestions']">Sorularım</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z6">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>      
+      <span style="cursor:pointer;" [routerLink]="['/']">Question Answer Portal</span>
+      <span class="spacer"></span>
+      <span *ngIf="this.apiService.checkLogin()">Hoş Geldin {{this.username}}</span>
+      <button *ngIf="!this.apiService.checkLogin()" [routerLink]="['/signup']" mat-button>Üye Ol</button>
+      <button *ngIf="!this.apiService.checkLogin()" [routerLink]="['/login']" mat-button>Oturum Aç</button>
+      <button *ngIf="this.apiService.checkLogin()" (click)="logOut()" mat-button>Oturum Kapat</button>
+    </mat-toolbar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

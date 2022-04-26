@@ -1,0 +1,50 @@
+<div class="container">
+  <h2>Üyeleri Listele</h2>
+  <hr>
+  <button mat-fab matTooltip="Soru Ekle" color="primary" (click)="addWriter()">
+    <mat-icon aria-label="label" >add</mat-icon>
+  </button>
+  <p>&nbsp;</p>
+
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kullanıcı Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let writer"> {{writer.username}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mail">
+      <mat-header-cell *matHeaderCellDef> Kullanıcı Maili
+      </mat-header-cell>
+      <mat-cell *matCellDef="let writer"> {{writer.mail}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kullanıcı Rolü
+      </mat-header-cell>
+      <mat-cell *matCellDef="let writer"> {{writer.role | admin}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="password">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kullanıcı Şifresi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let writer"> {{writer.password}} </mat-cell>
+    </ng-container>    
+    <ng-container matColumnDef="detail">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let writer">
+        <button mat-icon-button color="primary" matTooltip="Profiline Git">
+          <mat-icon aria-label="label">person</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" matTooltip="Kullanıcı Düzenle" (click)="editWriter(writer)">
+          <mat-icon aria-label="label">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" matTooltip="Kullanıcı Sil" (click)="deleteWriter(writer)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>
